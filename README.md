@@ -1,6 +1,6 @@
 # TransVip Challenge
 
-## Primeros pasos (Proyecto)
+## Primeros pasos (Proyecto) 🚀
 
 Clona el repositorio en tu máquina local y luego estando en la raíz del proyecto, ejecuta el siguiente comando:
 
@@ -16,19 +16,23 @@ Una vez instaladas las dependencias, se debe ejecutar el siguiente comando para 
 pnpm dev
 ```
 
-Este comando correrá tanto el front como el back del proyecto. El front se ejecutará en el puerto 4000 y el back en el puerto 3000.
+Este comando correrá tanto el front como el back del proyecto. El front se ejecutará en el puerto `4000` y el back en el puerto `3000`.
 
-Importante: Antes de levantar todos los servicios, se debe tener el servidor de MySQL corriendo. Si no se tiene instalado, se puede seguir los pasos que se encuentran más abajo.
+> [!IMPORTANT]
+> - Antes de levantar todos los servicios, se debe tener el servidor de MySQL corriendo. Si no se tiene instalado, se puede seguir los pasos que se encuentran más abajo.
+> - La versión minima requerida de Node.js para correr el proyecto es desde la **18.x** en adelante (LTS).
 
 ## Primeros pasos (MySQL Server)
 
 Para correr el proyecto con MySQL, de utilizó DBngin, una herramienta que permite correr MySQL en MacOS de manera sencilla. Para instalarlo, se puede hacer desde [aquí](https://dbngin.com/).
 
-Una vez instalado, se debe agregar un nuevo servidor MySQL y configurar la base de datos con los siguientes datos:
+Una vez instalado, se debe agregar un nuevo servidor MySQL y configurar la base de datos con los siguientes datos utilizados:
 
-- **Service:** MySQL
+- **Service:** MySQL (requerido)
 - **Name:** todolist-database
-- **Port:** 3306
+- **Port:** 3306 (requerido)
+
+Esto para que la conexión con el servidor de MySQL sea exitosa, ruta: `backend/models/mysql/todo.ts`.
 
 Una vez activado el servidor, se debe ejecutar el script de sql el cual se encuentra en la carpeta `script/todolist-database.sql` en la raíz del proyecto.
 
@@ -49,3 +53,7 @@ Para ello puedes utilizar MySQL Workbench o cualquier otro cliente de MySQL.
 - [x] Estado global de aplicación con Redux Toolkit
 - [x] Workspaces con pnpm para manejar dependencias de front y back
 - [ ] Editar descripción de una tarea
+
+## 🔑 Licencia 
+
+- [MIT](https://github.com/pheralb/svgl/blob/main/LICENSE).
