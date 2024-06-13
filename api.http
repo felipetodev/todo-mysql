@@ -20,3 +20,6 @@ Content-Type: application/json
 {
   "completed": 1
 }
+
+### Borrar un todo
+DELETE http://localhost:3000/todos/3ef7cfdc-2935-11ef-8333-72596a09eb81

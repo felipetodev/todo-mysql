@@ -53,4 +53,23 @@ export class TodoController {
       res.status(500).json({ error: 'Failed to update todo' });
     }
   }
+
+  delete = async (req: Request, res: Response): Promise<void> => {
+    const { id } = req.params;
+
+    console.log({ id })
+
+    if (!id) {
+      res.status(400).json({ error: 'Missing data' });
+      return;
+    }
+
+    try {
+      await this.todoModel.delete({ id });
+
+      res.status(204).send();
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to delete todo' });
+    }
+  }
 }

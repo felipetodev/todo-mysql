@@ -66,5 +66,16 @@ export class TodoModel {
     return todos as Todo[]
   }
 
-  // static async delete(id: number) { }
+  static async delete({ id }: { id: Todo["id"] }) {
+    const connection = await mysql.createConnection(config)
+
+    try {
+      await connection.query(
+        "DELETE FROM todo WHERE id = UUID_TO_BIN(?);",
+        [id]
+      )
+    } catch (error) {
+      throw new Error('Failed to delete todo')
+    }
+  }
 }
