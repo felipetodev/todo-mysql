@@ -16,7 +16,7 @@ Una vez instaladas las dependencias, se debe ejecutar el siguiente comando para 
 pnpm dev
 ```
 
-Este comando correrá tanto el front como el back del proyecto. El front se ejecutará en el puerto 3000 y el back en el puerto 4000.
+Este comando correrá tanto el front como el back del proyecto. El front se ejecutará en el puerto 4000 y el back en el puerto 3000.
 
 Importante: Antes de levantar todos los servicios, se debe tener el servidor de MySQL corriendo. Si no se tiene instalado, se puede seguir los pasos que se encuentran más abajo.
 
