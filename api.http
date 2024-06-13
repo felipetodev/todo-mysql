@@ -5,7 +5,7 @@ GET http://localhost:3000/todos
 GET http://localhost:3000/todos/1990df63-4da7-11ee-aedf-32323730fdc3
 
 
-### Crear una película con POST
+### Crear un todo con POST
 POST http://localhost:3000/todos
 Content-Type: application/json
 
@@ -13,3 +13,10 @@ Content-Type: application/json
   "description": "Comprar pan de molde"
 }
 
+### Actualizar un todo
+PATCH http://localhost:3000/todos/3ef7cfdc-2935-11ef-8333-72596a09eb81
+Content-Type: application/json
+
+{
+  "completed": 1
+}

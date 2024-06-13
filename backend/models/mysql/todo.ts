@@ -44,7 +44,27 @@ export class TodoModel {
     return todos as Todo[]
   }
 
-  // static async update(id: number, data: any) { }
+  static async update({ id, todo }: { id: Todo["id"], todo: Todo }) {
+    const connection = await mysql.createConnection(config)
+
+    try {
+      await connection.query(
+        `UPDATE todo
+        SET description = IFNULL(?, description), completed = IFNULL(?, completed)
+        WHERE id = UUID_TO_BIN(?);`,
+        [todo.description, todo.completed, id]
+      )
+    } catch (error) {
+      throw new Error('Failed to update todo')
+    }
+
+    const [todos] = await connection.query(
+      "SELECT *, BIN_TO_UUID(id) id FROM todo WHERE id = UUID_TO_BIN(?);",
+      [id]
+    )
+
+    return todos as Todo[]
+  }
 
   // static async delete(id: number) { }
 }

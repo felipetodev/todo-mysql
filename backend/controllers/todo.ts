@@ -35,4 +35,22 @@ export class TodoController {
       res.status(500).json({ error: 'Failed to create todo' });
     }
   }
+
+  update = async (req: Request, res: Response): Promise<void> => {
+    const { id } = req.params;
+    const todo = req.body as Todo;
+
+    if (!id || !todo) {
+      res.status(400).json({ error: 'Missing data' });
+      return;
+    }
+
+    try {
+      const todoUpdated = await this.todoModel.update({ id, todo });
+
+      res.json(todoUpdated);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to update todo' });
+    }
+  }
 }

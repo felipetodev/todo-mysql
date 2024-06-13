@@ -14,5 +14,7 @@ export const createTodoRouter = ({ todoModel }: RouterOptions) => {
   todoRouter.get("/", todoController.getAll);
   todoRouter.post("/", todoController.create);
 
+  todoRouter.patch('/:id', todoController.update)
+
   return todoRouter;
 }
