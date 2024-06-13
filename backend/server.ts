@@ -2,6 +2,7 @@ import express, { json } from "express"
 import cors from "cors"
 import { TodoModel } from "./models/mysql/todo"
 import { createTodoRouter } from "./routes/todo"
+import 'dotenv/config'
 
 const app = express()
 app.use(json())
