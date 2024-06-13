@@ -1,5 +1,7 @@
 # TransVip Challenge
 
+https://github.com/felipetodev/transvip-chall/assets/69825873/da007103-fdf0-4cae-8a52-2aea5df728f2
+
 ## Primeros pasos (Proyecto) 🚀
 
 Clona el repositorio en tu máquina local y luego estando en la raíz del proyecto, ejecuta el siguiente comando:
