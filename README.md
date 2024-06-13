@@ -46,4 +46,6 @@ Para ello puedes utilizar MySQL Workbench o cualquier otro cliente de MySQL.
 - [x] Marcar una tarea como completada
 - [x] Eliminar una tarea
 - [x] Persistencia de datos en MySQL
+- [x] Estado global de aplicación con Redux Toolkit
+- [x] Workspaces con pnpm para manejar dependencias de front y back
 - [ ] Editar descripción de una tarea
