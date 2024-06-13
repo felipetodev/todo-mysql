@@ -11,7 +11,21 @@ app.use(cors())
 const port = process.env.PORT ?? 3000
 
 app.get("/", (req, res) => {
-  res.json({ message: "Hello TransVip Challenge! 🚀" })
+  res.json([
+    {
+      Welcome: "Hello TransVip Challenge! 🚀"
+    },
+    {
+      endpoints: {
+        todos: {
+          GET: "/todos",
+          POST: "/todos",
+          PATCH: "/todos/:id",
+          DELETE : "/todos/:id"
+        }
+      }
+    }
+  ])
 })
 
 app.use('/todos', createTodoRouter({ todoModel: TodoModel }))

@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import {
   addTodo,
+  editTodo,
   deleteTodo,
   completedTodo,
   fetchTodos,
@@ -20,6 +21,10 @@ export function useStore() {
     dispatch(addTodo({ description }))
   }
 
+  const onEditTodo = async ({ id, description }: { id: string, description: string }) => {
+    dispatch(editTodo({ id, description }))
+  }
+
   const onDeleteTodo = ({ id }: { id: string }) => {
     dispatch(deleteTodo({ id }))
   }
@@ -31,6 +36,7 @@ export function useStore() {
   return {
     todos,
     onAddTodo,
+    onEditTodo,
     onDeleteTodo,
     onCompletedTodo
   }

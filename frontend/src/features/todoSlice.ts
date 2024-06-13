@@ -20,7 +20,7 @@ export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
   if (!resp.ok) {
     throw new Error('Failed to fetch todos')
   }
-  
+
   return await resp.json()
 })
 
@@ -35,6 +35,22 @@ export const addTodo = createAsyncThunk('todos/addTodo', async ({ description }:
 
   if (!resp.ok) {
     toast.error("Error al agregar tarea")
+  }
+
+  return await resp.json() as Todo[]
+})
+
+export const editTodo = createAsyncThunk('todos/editTodo', async ({ id, description }: { id: string, description: string }) => {
+  const resp = await fetch(`${API_URL}/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ description })
+  })
+
+  if (!resp.ok) {
+    toast.error("Error al editar tarea")
   }
 
   return await resp.json() as Todo[]
@@ -101,17 +117,29 @@ export const todosSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchTodos.fulfilled, (state, action: PayloadAction<Todo[]>) => {
+    builder.addCase(editTodo.fulfilled, (state, action: PayloadAction<Todo[]>) => {
       const todos = action.payload
 
-      return { ...state, todos }
+      toast.success("Tarea editada con éxito")
+      return {
+        ...state,
+        todos: state.todos.map((todo) => {
+          const updatedTodo = todos.find((t) => t.id === todo.id)
+          return updatedTodo ? updatedTodo : todo
+        })
+      }
     }),
-    builder.addCase(addTodo.fulfilled, (state, action: PayloadAction<Todo[]>) => {
-      const todo = action.payload
+      builder.addCase(fetchTodos.fulfilled, (state, action: PayloadAction<Todo[]>) => {
+        const todos = action.payload
 
-      toast.success("Tarea agregada con éxito")
-      return { ...state, todos: [...state.todos, ...todo] }
-    })
+        return { ...state, todos }
+      }),
+      builder.addCase(addTodo.fulfilled, (state, action: PayloadAction<Todo[]>) => {
+        const todo = action.payload
+
+        toast.success("Tarea agregada con éxito")
+        return { ...state, todos: [...state.todos, ...todo] }
+      })
   }
 })
 

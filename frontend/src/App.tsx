@@ -21,7 +21,7 @@ function App() {
         {todos.length === 0 && (
           <div className="flex items-center justify-center rounded border w-full h-[50px] border-ring bg-primary/20">
             <p className="text-primary font-semibold">
-              No hay tareas
+              No hay tareas pendientes.
             </p>
           </div>
         )}
