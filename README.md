@@ -56,4 +56,4 @@ Para ello puedes utilizar MySQL Workbench o cualquier otro cliente de MySQL.
 
 ## 🔑 Licencia 
 
-- [MIT](https://github.com/pheralb/svgl/blob/main/LICENSE).
+- [MIT](https://github.com/felipetodev/transvip-chall/blob/main/LICENSE).
