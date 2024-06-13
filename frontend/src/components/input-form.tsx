@@ -20,7 +20,13 @@ export function InputForm() {
       />
       <Button
         onClick={() => {
-          if (!inputRef.current?.value.trim()) return toast.warning("Por favor, ingrese una tarea")
+          if (!inputRef.current?.value.trim()) {
+            return toast.warning("Por favor, ingrese una tarea")
+          }
+          else if (!isNaN(+inputRef.current.value)) {
+            return toast.error("Por favor, ingrese texto")
+          }
+
           onAddTodo({ description: inputRef.current.value })
           inputRef.current.value = ""
         }}
