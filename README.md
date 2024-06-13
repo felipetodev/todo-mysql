@@ -1,8 +1,8 @@
-# TransVip Challenge
+# TransVip Challenge - Todo List App
 
 https://github.com/felipetodev/transvip-chall/assets/69825873/da007103-fdf0-4cae-8a52-2aea5df728f2
 
-## Primeros pasos (Proyecto) 🚀
+## 🚀 Primeros pasos (Proyecto)
 
 Clona el repositorio en tu máquina local y luego estando en la raíz del proyecto, ejecuta el siguiente comando:
 
@@ -50,12 +50,12 @@ Una vez activado el servidor, se debe ejecutar el script de sql el cual se encue
 
 Para ello puedes utilizar MySQL Workbench o cualquier otro cliente de MySQL.
 
-## Tecnologías utilizadas
+## 🛠️ Tecnologías utilizadas
 
 - **Frontend:** TypeScript, Vite.js, React, TailwindCSS, Redux Toolkit, ShadCN.
 - **Backend:** TypeScript, Node.js, Express, MySQL.
 
-## Features
+## 📝 Features
 
 - [x] Crear una tarea
 - [x] Listar todas las tareas
@@ -64,7 +64,7 @@ Para ello puedes utilizar MySQL Workbench o cualquier otro cliente de MySQL.
 - [x] Persistencia de datos en MySQL
 - [x] Estado global de aplicación con Redux Toolkit
 - [x] Workspaces con pnpm para manejar dependencias de front y back
-- [ ] Editar descripción de una tarea
+- [x] Editar descripción de una tarea
 
 ## 🔑 Licencia 
 
