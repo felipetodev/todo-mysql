@@ -18,6 +18,16 @@ Una vez instaladas las dependencias, se debe ejecutar el siguiente comando para 
 pnpm dev
 ```
 
+o puedes correr el proyecto de manera individual con los siguientes comandos:
+
+```bash
+pnpm -F frontend dev
+```
+
+```bash
+pnpm -F backend dev
+```
+
 Este comando correrá tanto el front como el back del proyecto. El front se ejecutará en el puerto `4000` y el back en el puerto `3000`.
 
 > [!IMPORTANT]
