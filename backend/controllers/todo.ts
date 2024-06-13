@@ -57,8 +57,6 @@ export class TodoController {
   delete = async (req: Request, res: Response): Promise<void> => {
     const { id } = req.params;
 
-    console.log({ id })
-
     if (!id) {
       res.status(400).json({ error: 'Missing data' });
       return;
