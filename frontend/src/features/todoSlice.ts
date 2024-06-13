@@ -3,6 +3,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { toast } from 'sonner'
 import { type PayloadAction } from '@reduxjs/toolkit'
 
+const API_URL = 'http://localhost:3000/todos';
+
 type TodosState = {
   todos: Todo[]
 }
@@ -11,8 +13,9 @@ const initialState: TodosState = {
   todos: []
 }
 
+
 export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
-  const resp = await fetch('http://localhost:3000/todos')
+  const resp = await fetch(API_URL)
 
   if (!resp.ok) {
     throw new Error('Failed to fetch todos')
@@ -22,7 +25,7 @@ export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
 })
 
 export const addTodo = createAsyncThunk('todos/addTodo', async ({ description }: { description: string }) => {
-  const resp = await fetch('http://localhost:3000/todos', {
+  const resp = await fetch(API_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -34,7 +37,7 @@ export const addTodo = createAsyncThunk('todos/addTodo', async ({ description }:
     toast.error("Error al agregar tarea")
   }
 
-  return await resp.json()
+  return await resp.json() as Todo[]
 })
 
 export const todosSlice = createSlice({
@@ -50,7 +53,7 @@ export const todosSlice = createSlice({
       const { id } = action.payload
 
       try {
-        fetch(`http://localhost:3000/todos/${id}`, {
+        fetch(`${API_URL}/${id}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json"
@@ -70,7 +73,7 @@ export const todosSlice = createSlice({
     completedTodo: (state, action: PayloadAction<{ id: string, value: boolean }>) => {
       const { id, value: isComplete } = action.payload
       try {
-        fetch(`http://localhost:3000/todos/${id}`, {
+        fetch(`${API_URL}/${id}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -103,12 +106,11 @@ export const todosSlice = createSlice({
 
       return { ...state, todos }
     }),
-    builder.addCase(addTodo.fulfilled, (state, action: PayloadAction<Todo>) => {
+    builder.addCase(addTodo.fulfilled, (state, action: PayloadAction<Todo[]>) => {
       const todo = action.payload
 
       toast.success("Tarea agregada con éxito")
-
-      return { ...state, todos: [...state.todos, todo] }
+      return { ...state, todos: [...state.todos, ...todo] }
     })
   }
 })
