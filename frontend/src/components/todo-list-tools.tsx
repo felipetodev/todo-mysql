@@ -10,7 +10,7 @@ type Props = {
 
 export function TodoListTools({ todoId, isCompleted }: Props) {
   return (
-    <div className="flex gap-x-1">
+    <div className="flex gap-x-1 ml-auto">
       <Button disabled={isCompleted} size="sm">
         <PencilIcon className="size-4" />
       </Button>
