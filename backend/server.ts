@@ -1,12 +1,13 @@
-import express from "express"
+import express, { json } from "express"
 import cors from "cors"
 import { TodoModel } from "./models/mysql/todo"
 import { createTodoRouter } from "./routes/todo"
 
 const app = express()
-const port = process.env.PORT ?? 3000
+app.use(json())
+app.use(cors())
 
-app.use(cors());
+const port = process.env.PORT ?? 3000
 
 app.get("/", (req, res) => {
   res.json({ message: "Hello TransVip Challenge! 🚀" })
