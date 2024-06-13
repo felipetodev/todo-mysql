@@ -1,8 +1,11 @@
 import { useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { useStore } from "@/lib/hooks/use-store"
+import { toast } from 'sonner'
 
 export function InputForm() {
+  const { onAddTodo } = useStore()
   const inputRef = useRef<HTMLInputElement>(null)
   return (
     <form
@@ -17,22 +20,9 @@ export function InputForm() {
       />
       <Button
         onClick={() => {
-          if (!inputRef.current?.value) return alert("Por favor, ingrese una tarea")
-          try {
-            fetch("http://localhost:3000/todos", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify({
-                description: inputRef.current.value,
-              })
-            })
-          } catch (e) {
-            alert(e)
-          } finally {
-            inputRef.current.value = ""
-          }
+          if (!inputRef.current?.value.trim()) return toast.warning("Por favor, ingrese una tarea")
+          onAddTodo({ description: inputRef.current.value })
+          inputRef.current.value = ""
         }}
       >
         AGREGAR

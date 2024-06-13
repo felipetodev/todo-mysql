@@ -1,5 +1,5 @@
 import { Checkbox } from "@/components/ui/checkbox"
-import { TodoListTools } from "./todo-list-tools"
+import { TodoListTools } from "@/components/todo-list-tools"
 import { cn } from "@/lib/utils"
 import { type Todo } from "@/lib/types"
 
@@ -19,6 +19,7 @@ export function TodoList({ id, description, completed, onCompletedChange }: Todo
           {description}
         </p>
         <TodoListTools
+          todoId={id}
           isCompleted={completed}
         />
       </div>

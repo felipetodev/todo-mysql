@@ -9,9 +9,18 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import { useStore } from "@/lib/hooks/use-store"
 import { PencilIcon, Trash2Icon } from "lucide-react"
+import { type Todo } from "@/lib/types"
 
-export function Modal({ type, children }: { type: "delete", children: React.ReactNode }) {
+type Props = {
+  todoId: Todo["id"],
+  type: "delete",
+  children: React.ReactNode
+}
+
+export function Modal({ todoId, type, children }: Props) {
+  const { onDeleteTodo } = useStore()
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -40,7 +49,9 @@ export function Modal({ type, children }: { type: "delete", children: React.Reac
         }
         <AlertDialogFooter>
           <AlertDialogCancel>NO, VOLVER</AlertDialogCancel>
-          <AlertDialogAction>SI, CONTINUAR</AlertDialogAction>
+          <AlertDialogAction onClick={() => onDeleteTodo({ id: todoId })}>
+            SI, CONTINUAR
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent >
     </AlertDialog >
