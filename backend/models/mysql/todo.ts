@@ -1,17 +1,25 @@
-import mysql from "mysql2/promise"
+import mysql, { Connection } from "mysql2/promise"
 import { type Todo } from "../../types";
 
 const config = {
-  host: 'localhost',
-  user: 'root',
-  port: 3306,
-  password: '',
+  host: 'localhost', // Your MySQL host
+  user: 'root', // Your MySQL username
+  port: 3306, // Your MySQL port
+  password: '', // Your MySQL password
   database: 'todolistdb'
 }
 
+let connection: Connection;
+
 export class TodoModel {
+  static async init() {
+    if (!connection) {
+      connection = await mysql.createConnection(config);
+    }
+  }
+
   static async getAll() {
-    const connection = await mysql.createConnection(config)
+    await this.init();
 
     const [result] = await connection.query(
       "SELECT *, BIN_TO_UUID(id) id FROM todo;"
@@ -21,7 +29,7 @@ export class TodoModel {
   }
 
   static async create({ description }: { description: Todo["description"] }) {
-    const connection = await mysql.createConnection(config)
+    await this.init();
 
     const [uuidResult] = await connection.query('SELECT UUID() uuid;')
     const [{ uuid }] = uuidResult as [{ uuid: string }]
@@ -45,7 +53,7 @@ export class TodoModel {
   }
 
   static async update({ id, todo }: { id: Todo["id"], todo: Todo }) {
-    const connection = await mysql.createConnection(config)
+    await this.init();
 
     try {
       await connection.query(
@@ -67,7 +75,7 @@ export class TodoModel {
   }
 
   static async delete({ id }: { id: Todo["id"] }) {
-    const connection = await mysql.createConnection(config)
+    await this.init();
 
     try {
       await connection.query(
