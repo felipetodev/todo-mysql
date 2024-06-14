@@ -48,7 +48,8 @@ Una vez instalado, se debe agregar un nuevo servidor MySQL y configurar la base 
 - **Password:** '' (sin contraseña) o la que corresponda en tu caso.
 
 Esto para que la conexión con el servidor de MySQL sea exitosa.
-MySQL Connection Config: [**backend/models/mysql/todo.ts**](src) ⚙️
+
+⚠️ MySQL Connection Config: [**backend/models/mysql/todo.ts**](backend/models/mysql/todo.ts) ⚙️
 
 Una vez activado el servidor, se debe ejecutar el script de sql el cual se encuentra en la carpeta `script/todolist-database.sql` en la raíz del proyecto.
 
