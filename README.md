@@ -38,13 +38,17 @@ Este comando correrá tanto el front como el back del proyecto. El front se ejec
 
 Para correr el proyecto con MySQL, de utilizó DBngin, una herramienta que permite correr MySQL en MacOS de manera sencilla. Para instalarlo, se puede hacer desde [aquí](https://dbngin.com/).
 
+Si estás en Windows, puedes utilizar MySQL Workbench o cualquier otro cliente de MySQL con una instancia local apuntando a localhost.
+
 Una vez instalado, se debe agregar un nuevo servidor MySQL y configurar la base de datos con los siguientes datos utilizados:
 
 - **Service:** MySQL (requerido)
 - **Name:** todolist-database
-- **Port:** 3306 (requerido)
+- **Port:** 3306 (por defecto) o el que corresponda en tu caso.
+- **Password:** '' (sin contraseña) o la que corresponda en tu caso.
 
-Esto para que la conexión con el servidor de MySQL sea exitosa, ruta: `backend/models/mysql/todo.ts`.
+Esto para que la conexión con el servidor de MySQL sea exitosa.
+MySQL Connection Config: [**backend/models/mysql/todo.ts**](src) ⚙️
 
 Una vez activado el servidor, se debe ejecutar el script de sql el cual se encuentra en la carpeta `script/todolist-database.sql` en la raíz del proyecto.
 
