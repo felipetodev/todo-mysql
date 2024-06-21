@@ -2,18 +2,17 @@ import express, { json } from "express"
 import cors from "cors"
 import { TodoModel } from "./models/mysql/todo"
 import { createTodoRouter } from "./routes/todo"
+import { APP_PORT } from "./config"
 import 'dotenv/config'
 
 const app = express()
 app.use(json())
 app.use(cors())
 
-const port = process.env.PORT ?? 3000
-
 app.get("/", (req, res) => {
   res.json([
     {
-      Welcome: "Hello TransVip Challenge! 🚀"
+      Welcome: "Hello MySQL Todo List API"
     },
     {
       endpoints: {
@@ -30,6 +29,6 @@ app.get("/", (req, res) => {
 
 app.use('/todos', createTodoRouter({ todoModel: TodoModel }))
 
-app.listen(port, () => {
-  console.log(`Server is running on port http://localhost:${port}`)
+app.listen(APP_PORT, () => {
+  console.log(`Server is running on port http://localhost:${APP_PORT}`)
 })

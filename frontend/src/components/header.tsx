@@ -9,7 +9,7 @@ export function Header() {
       </h1>
       <a
         rel="noreferrer noopener"
-        href="https://github.com/felipetodev/transvip-chall"
+        href="https://github.com/felipetodev/todo-mysql"
         target="_blank"
         className={cn(buttonVariants({ variant: "outline" }))}
       >

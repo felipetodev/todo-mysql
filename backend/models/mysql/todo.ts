@@ -1,41 +1,37 @@
 import mysql, { Connection } from "mysql2/promise"
+import { mysqlConfig as config } from "../../config";
 import { type Todo } from "../../types";
 
-const config = {
-  host: 'localhost', // Your MySQL host
-  user: 'root', // Your MySQL username
-  port: 3306, // Your MySQL port
-  password: '', // Your MySQL password
-  database: 'todolistdb'
-}
+class Model {
+  private connection!: Connection
 
-let connection: Connection;
+  constructor() {
+    this.initConnection()
+  }
 
-export class TodoModel {
-  static async init() {
-    if (!connection) {
-      connection = await mysql.createConnection(config);
+  private initConnection = async () => {
+    try {
+      this.connection = await mysql.createConnection(config)
+    } catch (e) {
+      console.error(e)
+      throw new Error("Failed to connect to MySQL ❌")
     }
   }
 
-  static async getAll() {
-    await this.init();
-
-    const [result] = await connection.query(
+  getAll = async () => {
+    const [result] = await this.connection.query(
       "SELECT *, BIN_TO_UUID(id) id FROM todo;"
     )
 
     return result as Todo[]
   }
 
-  static async create({ description }: { description: Todo["description"] }) {
-    await this.init();
-
-    const [uuidResult] = await connection.query('SELECT UUID() uuid;')
+  create = async ({ description }: { description: Todo["description"] }) => {
+    const [uuidResult] = await this.connection.query('SELECT UUID() uuid;')
     const [{ uuid }] = uuidResult as [{ uuid: string }]
 
     try {
-      await connection.query(
+      await this.connection.query(
         `INSERT INTO todo (id, description, completed)
         VALUES (UUID_TO_BIN("${uuid}"), ?, ?);`,
         [description, false]
@@ -44,7 +40,7 @@ export class TodoModel {
       throw new Error('Failed to create todo')
     }
 
-    const [todos] = await connection.query(
+    const [todos] = await this.connection.query(
       "SELECT *, BIN_TO_UUID(id) id FROM todo WHERE id = UUID_TO_BIN(?);",
       [uuid]
     )
@@ -52,11 +48,9 @@ export class TodoModel {
     return todos as Todo[]
   }
 
-  static async update({ id, todo }: { id: Todo["id"], todo: Todo }) {
-    await this.init();
-
+  update = async ({ id, todo }: { id: Todo["id"], todo: Todo }) => {
     try {
-      await connection.query(
+      await this.connection.query(
         `UPDATE todo
         SET description = IFNULL(?, description), completed = IFNULL(?, completed)
         WHERE id = UUID_TO_BIN(?);`,
@@ -66,7 +60,7 @@ export class TodoModel {
       throw new Error('Failed to update todo')
     }
 
-    const [todos] = await connection.query(
+    const [todos] = await this.connection.query(
       "SELECT *, BIN_TO_UUID(id) id FROM todo WHERE id = UUID_TO_BIN(?);",
       [id]
     )
@@ -74,11 +68,9 @@ export class TodoModel {
     return todos as Todo[]
   }
 
-  static async delete({ id }: { id: Todo["id"] }) {
-    await this.init();
-
+  delete = async ({ id }: { id: Todo["id"] }) => {
     try {
-      await connection.query(
+      await this.connection.query(
         "DELETE FROM todo WHERE id = UUID_TO_BIN(?);",
         [id]
       )
@@ -87,3 +79,5 @@ export class TodoModel {
     }
   }
 }
+
+export const TodoModel = new Model();
