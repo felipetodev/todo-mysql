@@ -1,4 +1,4 @@
-# TransVip Challenge - Todo List App
+# Todo List - MySQL App
 
 https://github.com/felipetodev/transvip-chall/assets/69825873/da007103-fdf0-4cae-8a52-2aea5df728f2
 
@@ -49,7 +49,9 @@ Una vez instalado, se debe agregar un nuevo servidor MySQL y configurar la base 
 
 Esto para que la conexión con el servidor de MySQL sea exitosa.
 
-⚠️ MySQL Connection Config: [**backend/models/mysql/todo.ts**](backend/models/mysql/todo.ts) ⚙️
+También puedes configurar la conexión con los datos de tu DB renombrando el archivo [**.env.example**](backend/.env.example) a `.env` ubicado en la raíz de la carpeta `backend` reemplazando los valores por los de tu config.
+
+⚠️ MySQL Connection Config: [**backend/config.ts**](backend/config.ts) ⚙️
 
 Una vez activado el servidor, se debe ejecutar el script de sql el cual se encuentra en la carpeta `script/todolist-database.sql` en la raíz del proyecto.
 
@@ -73,4 +75,4 @@ Para ello puedes utilizar MySQL Workbench o cualquier otro cliente de MySQL.
 
 ## 🔑 Licencia 
 
-- [MIT](https://github.com/felipetodev/transvip-chall/blob/main/LICENSE).
+- [MIT](https://github.com/felipetodev/todo-mysql/blob/main/LICENSE).
